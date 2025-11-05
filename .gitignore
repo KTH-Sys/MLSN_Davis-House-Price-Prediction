@@ -218,7 +218,8 @@ __marimo__/
 Thumbs.db
 
 # Streamlit
-.streamlit/
+.streamlit/*
+!.streamlit/config.toml
 
 # Model files (optional - uncomment if you don't want to commit models)
 # models/*.pkl
