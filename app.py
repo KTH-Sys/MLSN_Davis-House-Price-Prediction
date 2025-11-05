@@ -12,18 +12,38 @@ Run locally:
 import streamlit as st
 import pandas as pd
 import numpy as np
-import joblib
 from pathlib import Path
-from sklearn.dummy import DummyRegressor
 import warnings
-import altair as alt
 
-from src.preprocess import (
-    build_feature_frame,
-    validate_inputs,
-    format_currency,
-    FEATURE_ORDER
-)
+# Import with error handling for deployment
+try:
+    import joblib
+except ImportError:
+    st.error("❌ joblib is not installed. Please install it: pip install joblib")
+    st.stop()
+
+try:
+    from sklearn.dummy import DummyRegressor
+except ImportError:
+    st.error("❌ scikit-learn is not installed. Please install it: pip install scikit-learn")
+    st.stop()
+
+try:
+    import altair as alt
+except ImportError:
+    st.error("❌ altair is not installed. Please install it: pip install altair")
+    st.stop()
+
+try:
+    from src.preprocess import (
+        build_feature_frame,
+        validate_inputs,
+        format_currency,
+        FEATURE_ORDER
+    )
+except ImportError as e:
+    st.error(f"❌ Error importing preprocessing module: {str(e)}")
+    st.stop()
 
 # Page configuration
 st.set_page_config(
