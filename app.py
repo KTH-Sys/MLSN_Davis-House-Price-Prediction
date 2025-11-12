@@ -96,7 +96,7 @@ def inject_custom_css(background_image_style: str) -> None:
         content: "";
         position: fixed;
         inset: 0;
-        background: linear-gradient(180deg, rgba(10, 7, 27, 0.82) 0%, rgba(24, 12, 52, 0.68) 60%, rgba(12, 8, 30, 0.85) 100%);
+        background: rgba(0, 0, 0, 0.0);
         z-index: 0;
     }
 
@@ -113,20 +113,20 @@ def inject_custom_css(background_image_style: str) -> None:
         max-width: 940px;
         margin: 0 auto;
         padding: 3rem 2.8rem;
-        background: rgba(26, 20, 53, 0.58);
+        background: rgba(26, 20, 53, 0.28);
         border: 1px solid var(--mlsn-border);
         border-radius: 28px;
-        backdrop-filter: blur(24px);
-        -webkit-backdrop-filter: blur(24px);
-        box-shadow: 0 35px 70px rgba(5, 5, 15, 0.55);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        box-shadow: 0 25px 55px rgba(5, 5, 15, 0.45);
     }
 
     [data-testid="stSidebar"] {
-        background: rgba(17, 14, 40, 0.65) !important;
+        background: rgba(17, 14, 40, 0.35) !important;
         border-right: 1px solid var(--mlsn-border);
-        backdrop-filter: blur(22px);
-        -webkit-backdrop-filter: blur(22px);
-        box-shadow: 18px 0 45px rgba(0, 0, 0, 0.45);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        box-shadow: 18px 0 35px rgba(0, 0, 0, 0.35);
     }
 
     [data-testid="stSidebar"] > div:first-child {
@@ -200,14 +200,14 @@ def inject_custom_css(background_image_style: str) -> None:
     }
 
     .prediction-card {
-        background: rgba(24, 18, 60, 0.62) !important;
-        border: 1px solid rgba(255, 255, 255, 0.14);
+        background: rgba(24, 18, 60, 0.35) !important;
+        border: 1px solid rgba(255, 255, 255, 0.18);
         border-radius: 24px;
         padding: 2.5rem;
-        box-shadow: 0 35px 60px rgba(5, 5, 15, 0.55);
+        box-shadow: 0 28px 55px rgba(5, 5, 15, 0.45);
         text-align: center;
-        backdrop-filter: blur(22px);
-        -webkit-backdrop-filter: blur(22px);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
     }
 
     .prediction-price {
@@ -219,10 +219,10 @@ def inject_custom_css(background_image_style: str) -> None:
     }
 
     [data-testid="stMetricContainer"] {
-        background: rgba(22, 17, 50, 0.6) !important;
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(22, 17, 50, 0.35) !important;
+        border: 1px solid rgba(255, 255, 255, 0.12);
         border-radius: 18px;
-        box-shadow: 0 22px 45px rgba(5, 5, 15, 0.5);
+        box-shadow: 0 18px 40px rgba(5, 5, 15, 0.45);
         padding: 1.2rem !important;
     }
 
@@ -238,21 +238,21 @@ def inject_custom_css(background_image_style: str) -> None:
     }
 
     [data-testid="stExpander"] {
-        background: rgba(24, 18, 60, 0.6) !important;
+        background: rgba(24, 18, 60, 0.35) !important;
         border: 1px solid rgba(255, 255, 255, 0.14);
         border-radius: 18px;
-        box-shadow: 0 18px 38px rgba(5, 5, 15, 0.45);
+        box-shadow: 0 16px 34px rgba(5, 5, 15, 0.4);
     }
 
     .stAlert {
         border-radius: 16px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 18px 36px rgba(5, 5, 15, 0.45);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 16px 32px rgba(5, 5, 15, 0.4);
     }
 
     hr {
         border: none;
-        border-top: 1px solid rgba(255, 255, 255, 0.15);
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
         margin: 2rem 0;
     }
 
