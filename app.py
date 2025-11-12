@@ -13,7 +13,9 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 from pathlib import Path
+import base64
 import warnings
+from string import Template
 
 # Import with error handling for deployment
 try:
@@ -57,9 +59,18 @@ st.set_page_config(
 warnings.filterwarnings('ignore')
 
 
-def inject_custom_css():
+def load_background_image_style() -> str:
+    """Return CSS background-image value (data URI or fallback gradient)."""
+    image_path = Path("assets/mlsn_purple_bg.jpg")
+    if image_path.exists():
+        encoded = base64.b64encode(image_path.read_bytes()).decode()
+        return f"url('data:image/jpeg;base64,{encoded}')"
+    return "linear-gradient(180deg, #0b071d 0%, #180c34 60%, #0c081e 100%)"
+
+
+def inject_custom_css(background_image_style: str) -> None:
     """Inject custom CSS for a dark MLSN glassmorphism aesthetic"""
-    st.markdown(
+    css_template = Template(
         """
     <style>
     :root {
@@ -73,7 +84,7 @@ def inject_custom_css():
     @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
 
     .stApp {
-        background-image: url('assets/mlsn_purple_bg.jpg');
+        background-image: $bg_style;
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
@@ -254,7 +265,6 @@ def inject_custom_css():
         text-decoration: none;
     }
 
-    /* Responsive */
     @media (max-width: 768px) {
         .main .block-container {
             padding: 1.8rem 1.2rem;
@@ -265,9 +275,10 @@ def inject_custom_css():
         }
     }
     </style>
-    """,
-        unsafe_allow_html=True,
+    """
     )
+
+    st.markdown(css_template.substitute(bg_style=background_image_style), unsafe_allow_html=True)
 
 
 @st.cache_resource(ttl=0)
@@ -327,7 +338,8 @@ def main():
     """Main application"""
     
     # Inject custom CSS
-    inject_custom_css()
+    background_image_style = load_background_image_style()
+    inject_custom_css(background_image_style)
     
     # Load model
     model, model_warning = load_model()
