@@ -529,19 +529,10 @@ def main():
             if model_info['has_feature_names']:
                 st.markdown(f"**Features:** {len(expected_cols)}")
 
-            st.markdown("""
-            <div style="margin-top: 1rem; font-size: 0.75rem; color: rgba(232, 235, 255, 0.6); text-align: center;">
-                © Machine Learning Student Network – UC Davis 2025
-            </div>
-            """, unsafe_allow_html=True)
-    
     st.sidebar.markdown("""
     ---
     <div style="text-align: center; margin-top: 1.2rem; margin-bottom: 0.8rem; padding: 0 0.5rem;">
-        <p style="font-size: 0.82rem; color: rgba(232, 235, 255, 0.78); line-height: 1.5;">
-            Built by <strong style="color: #6C63FF;">Kyaw Thi Ha, Yaohong Chen, Mehak Gulati, Zicheng Huang,<br>and Jyothiswaroop Makala</strong>
-        </p>
-        <p style="font-size: 0.75rem; color: rgba(232, 235, 255, 0.6); margin-top: 0.6rem;">
+        <p style="font-size: 0.78rem; color: rgba(232, 235, 255, 0.62); margin-top: 0.4rem;">
             © Machine Learning Student Network – UC Davis 2025
         </p>
     </div>
