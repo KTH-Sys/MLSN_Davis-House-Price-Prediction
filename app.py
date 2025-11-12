@@ -383,8 +383,8 @@ def main():
             
             st.markdown("""
             <div style="text-align: center; margin-top: 1.5rem; margin-bottom: 1rem; padding: 0 0.5rem;">
-                <p style="font-size: 0.85rem; color: rgba(232, 235, 255, 0.7); line-height: 1.5;">
-                    Built by <strong style="color: #6C63FF;">Machine Learning Student Network – UC Davis</strong>
+                <p style="font-size: 0.85rem; color: rgba(232, 235, 255, 0.8); line-height: 1.6;">
+                    Built by <strong style="color: #6C63FF;">Kyaw Thi Ha, Yaohong Chen, Mehak Gulati, Zicheng Huang,<br>and Jyothiswaroop Makala</strong>
                 </p>
             </div>
             """, unsafe_allow_html=True)
@@ -528,6 +528,12 @@ def main():
                 st.success(f"✅ **Model Type:** `{model_info['model_type']}`")
             if model_info['has_feature_names']:
                 st.markdown(f"**Features:** {len(expected_cols)}")
+
+            st.markdown("""
+            <div style="margin-top: 1rem; font-size: 0.75rem; color: rgba(232, 235, 255, 0.6); text-align: center;">
+                © Machine Learning Student Network – UC Davis 2025
+            </div>
+            """, unsafe_allow_html=True)
     
     # Main content
     st.title("Davis House Price Predictor")
