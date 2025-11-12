@@ -489,7 +489,7 @@ def main():
                 (base_chart + text)
                 .configure_axis(grid=False)
                 .configure_view(strokeOpacity=0)
-                .configure_background(color='rgba(0,0,0,0)')
+                .configure(background='rgba(0,0,0,0)')
             )
 
             st.altair_chart(styled_chart, use_container_width=True)
