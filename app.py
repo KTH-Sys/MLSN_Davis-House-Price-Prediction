@@ -361,6 +361,12 @@ def main():
             dataset_median = 600000
             dataset_prices = None
     
+    # Ensure required session state keys exist
+    if 'predicted_price' not in st.session_state:
+        st.session_state.predicted_price = None
+    if 'user_inputs' not in st.session_state:
+        st.session_state.user_inputs = None
+
     # Get model info
     model_info = get_model_info(model)
     expected_cols = model_info['feature_names']
@@ -529,7 +535,9 @@ def main():
             if model_info['has_feature_names']:
                 st.markdown(f"**Features:** {len(expected_cols)}")
 
-    if st.session_state.predicted_price is None:
+    predicted_price = st.session_state.get('predicted_price')
+
+    if predicted_price is None:
         footer_text = (
             "<p style=\"font-size: 0.78rem; color: rgba(232, 235, 255, 0.62); margin-top: 0.4rem;\">"
             "© Machine Learning Student Network – UC Davis 2025"
