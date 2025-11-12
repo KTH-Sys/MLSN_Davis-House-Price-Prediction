@@ -370,7 +370,7 @@ def main():
         has_prediction = 'predicted_price' in st.session_state and st.session_state.predicted_price is not None
         
         # Logo paths
-        logo_path_png = Path("assets/mlsn_logo.png")
+        logo_path_png = Path("assets/logo.png")
         logo_path_jpg = Path("assets/MLSN_logo.jpg")
         logo_path = logo_path_png if logo_path_png.exists() else (logo_path_jpg if logo_path_jpg.exists() else None)
         
@@ -530,7 +530,7 @@ def main():
                 st.markdown(f"**Features:** {len(expected_cols)}")
     
     # Main content
-    st.title("🏠 Davis House Price Predictor")
+    st.title("Davis House Price Predictor")
     st.markdown('<p class="subtitle">Estimate housing prices in Davis with machine learning.</p>', unsafe_allow_html=True)
     
     # Prediction form
