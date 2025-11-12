@@ -535,6 +535,18 @@ def main():
             </div>
             """, unsafe_allow_html=True)
     
+    st.sidebar.markdown("""
+    ---
+    <div style="text-align: center; margin-top: 1.2rem; margin-bottom: 0.8rem; padding: 0 0.5rem;">
+        <p style="font-size: 0.82rem; color: rgba(232, 235, 255, 0.78); line-height: 1.5;">
+            Built by <strong style="color: #6C63FF;">Kyaw Thi Ha, Yaohong Chen, Mehak Gulati, Zicheng Huang,<br>and Jyothiswaroop Makala</strong>
+        </p>
+        <p style="font-size: 0.75rem; color: rgba(232, 235, 255, 0.6); margin-top: 0.6rem;">
+            © Machine Learning Student Network – UC Davis 2025
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+
     # Main content
     st.title("Davis House Price Predictor")
     st.markdown('<p class="subtitle">Estimate housing prices in Davis with machine learning.</p>', unsafe_allow_html=True)
