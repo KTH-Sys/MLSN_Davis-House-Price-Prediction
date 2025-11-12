@@ -58,211 +58,216 @@ warnings.filterwarnings('ignore')
 
 
 def inject_custom_css():
-    """Inject custom CSS for modern glassy design with purple accents"""
-    st.markdown("""
+    """Inject custom CSS for a dark MLSN glassmorphism aesthetic"""
+    st.markdown(
+        """
     <style>
-    /* Import Google Fonts - Open Sans */
+    :root {
+        --mlsn-purple: #6C63FF;
+        --mlsn-purple-dark: #2B1E57;
+        --mlsn-text-primary: rgba(232, 235, 255, 0.92);
+        --mlsn-text-muted: rgba(220, 223, 255, 0.7);
+        --mlsn-border: rgba(255, 255, 255, 0.18);
+    }
+
     @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
-    
-    /* Main background - Subtle gradient */
+
     .stApp {
-        background: linear-gradient(180deg, #ffffff 0%, #f4f0ff 100%);
+        background-image: url('assets/mlsn_purple_bg.jpg');
+        background-size: cover;
+        background-position: center;
         background-attachment: fixed;
+        color: var(--mlsn-text-primary);
         font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     }
-    
-    /* Main container */
+
+    .stApp::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(10, 7, 27, 0.82) 0%, rgba(24, 12, 52, 0.68) 60%, rgba(12, 8, 30, 0.85) 100%);
+        z-index: 0;
+    }
+
+    [data-testid="stAppViewContainer"] > .main {
+        position: relative;
+        z-index: 1;
+    }
+
+    .stApp, .stApp p, .stApp span, .stApp li, .stApp label, .stApp h1, .stApp h2, .stApp h3, .stApp h4, .stApp h5 {
+        color: var(--mlsn-text-primary) !important;
+    }
+
     .main .block-container {
-        max-width: 900px;
+        max-width: 940px;
         margin: 0 auto;
-        padding: 2rem 2rem;
-        background: transparent;
+        padding: 3rem 2.8rem;
+        background: rgba(26, 20, 53, 0.58);
+        border: 1px solid var(--mlsn-border);
+        border-radius: 28px;
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        box-shadow: 0 35px 70px rgba(5, 5, 15, 0.55);
     }
-    
-    /* Glassy sidebar */
+
     [data-testid="stSidebar"] {
-        background: rgba(255, 255, 255, 0.85) !important;
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border-right: 1px solid rgba(108, 99, 255, 0.1);
-        box-shadow: 2px 0 20px rgba(0, 0, 0, 0.05);
+        background: rgba(17, 14, 40, 0.65) !important;
+        border-right: 1px solid var(--mlsn-border);
+        backdrop-filter: blur(22px);
+        -webkit-backdrop-filter: blur(22px);
+        box-shadow: 18px 0 45px rgba(0, 0, 0, 0.45);
     }
-    
+
     [data-testid="stSidebar"] > div:first-child {
-        padding-top: 1.5rem;
-        background: transparent !important;
+        padding-top: 2.4rem;
     }
-    
-    /* Title styling */
+
+    [data-testid="stSidebar"] * {
+        color: var(--mlsn-text-primary) !important;
+    }
+
     h1 {
         text-align: center;
-        color: #6C63FF;
+        color: var(--mlsn-text-primary);
         font-weight: 700;
         margin-bottom: 0.5rem;
         font-size: 2.5rem;
-        font-family: 'Open Sans', sans-serif;
+        text-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
     }
-    
-    /* Subtitle */
+
     .subtitle {
         text-align: center;
-        color: #6b7280;
+        color: rgba(232, 235, 255, 0.75) !important;
         font-size: 1.1rem;
-        margin-bottom: 2rem;
+        margin-bottom: 2.2rem;
         font-weight: 400;
     }
-    
-    /* Glassy form container */
-    [data-testid="stForm"] {
-        background: rgba(255, 255, 255, 0.9) !important;
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-        border: 1px solid rgba(108, 99, 255, 0.15);
-        padding: 2.5rem;
-        border-radius: 20px;
-        box-shadow: 0 8px 32px rgba(108, 99, 255, 0.1);
-        margin: 2rem 0;
+
+    label {
+        color: var(--mlsn-text-muted) !important;
+        font-weight: 600;
+        font-size: 0.95rem;
     }
-    
-    /* Input fields - Glassy white */
+
     [data-testid="stNumberInput"] > div > div,
     [data-testid="stTextInput"] > div > div {
-        background: rgba(255, 255, 255, 0.95) !important;
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(108, 99, 255, 0.2) !important;
-        border-radius: 12px !important;
-        box-shadow: 0 2px 8px rgba(108, 99, 255, 0.05);
+        background: rgba(255, 255, 255, 0.08) !important;
+        border: 1px solid rgba(255, 255, 255, 0.16) !important;
+        border-radius: 14px !important;
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05), 0 16px 35px rgba(5, 5, 15, 0.45);
     }
-    
+
     [data-testid="stNumberInput"] input,
     [data-testid="stTextInput"] input {
+        color: var(--mlsn-text-primary) !important;
+        font-weight: 500;
         background: transparent !important;
-        color: #1f2937 !important;
-        font-family: 'Open Sans', sans-serif;
     }
-    
-    /* Input labels */
-    label {
-        font-weight: 600;
-        color: #374151;
-        font-size: 0.95rem;
-        font-family: 'Open Sans', sans-serif;
-    }
-    
-    /* Purple pill button */
+
     .stButton > button {
-        background: #6C63FF !important;
-        color: white !important;
+        background: linear-gradient(135deg, rgba(124, 108, 255, 0.95), rgba(108, 99, 255, 0.95)) !important;
+        color: #F7F8FF !important;
         border: none !important;
         border-radius: 50px !important;
-        padding: 0.75rem 2rem;
+        padding: 0.85rem 2.4rem;
         font-size: 1.1rem;
         font-weight: 600;
-        font-family: 'Open Sans', sans-serif;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
-        width: 100%;
+        letter-spacing: 0.02em;
+        box-shadow: 0 20px 40px rgba(108, 99, 255, 0.45);
+        transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
     }
-    
+
     .stButton > button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(108, 99, 255, 0.5);
-        background: #5a52e6 !important;
+        transform: translateY(-4px) scale(1.02);
+        box-shadow: 0 28px 55px rgba(108, 99, 255, 0.55);
+        filter: brightness(1.05);
     }
-    
-    /* Prediction metric card */
+
+    .stButton > button:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.6);
+    }
+
     .prediction-card {
-        background: rgba(255, 255, 255, 0.9) !important;
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-        border: 1px solid rgba(108, 99, 255, 0.2);
-        border-radius: 20px;
+        background: rgba(24, 18, 60, 0.62) !important;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 24px;
         padding: 2.5rem;
-        box-shadow: 0 8px 30px rgba(108, 99, 255, 0.15);
-        margin: 2rem 0;
+        box-shadow: 0 35px 60px rgba(5, 5, 15, 0.55);
         text-align: center;
+        backdrop-filter: blur(22px);
+        -webkit-backdrop-filter: blur(22px);
     }
-    
+
     .prediction-price {
-        font-size: 3.5rem;
+        font-size: 3.6rem;
         font-weight: 700;
-        margin: 1rem 0;
-        color: #6C63FF;
-        font-family: 'Open Sans', sans-serif;
+        color: #F6F5FF !important;
+        margin: 0.5rem 0 0.2rem 0;
+        text-shadow: 0 12px 25px rgba(108, 99, 255, 0.35);
     }
-    
-    /* Metric styling */
+
     [data-testid="stMetricContainer"] {
-        background: rgba(255, 255, 255, 0.9) !important;
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(108, 99, 255, 0.15);
-        border-radius: 15px;
-        padding: 1.5rem;
-        box-shadow: 0 4px 20px rgba(108, 99, 255, 0.1);
+        background: rgba(22, 17, 50, 0.6) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 18px;
+        box-shadow: 0 22px 45px rgba(5, 5, 15, 0.5);
+        padding: 1.2rem !important;
     }
-    
+
+    [data-testid="stMetricLabel"] {
+        color: var(--mlsn-text-muted) !important;
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
     [data-testid="stMetricValue"] {
-        font-size: 3rem;
-        color: #6C63FF;
-        font-family: 'Open Sans', sans-serif;
+        color: #EEF0FF !important;
         font-weight: 700;
     }
-    
-    [data-testid="stMetricLabel"] {
-        font-size: 1.1rem;
-        color: #6b7280;
-        font-family: 'Open Sans', sans-serif;
+
+    [data-testid="stExpander"] {
+        background: rgba(24, 18, 60, 0.6) !important;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 18px;
+        box-shadow: 0 18px 38px rgba(5, 5, 15, 0.45);
     }
-    
-    /* Sidebar info boxes */
-    [data-testid="stInfo"] {
-        background: rgba(108, 99, 255, 0.08) !important;
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(108, 99, 255, 0.2);
-        border-left: 4px solid #6C63FF;
-        border-radius: 12px;
-        box-shadow: 0 2px 12px rgba(108, 99, 255, 0.1);
+
+    .stAlert {
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 18px 36px rgba(5, 5, 15, 0.45);
     }
-    
-    [data-testid="stSuccess"] {
-        background: rgba(34, 197, 94, 0.1) !important;
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(34, 197, 94, 0.2);
-        border-radius: 12px;
-        box-shadow: 0 2px 12px rgba(34, 197, 94, 0.1);
+
+    hr {
+        border: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+        margin: 2rem 0;
     }
-    
-    [data-testid="stWarning"] {
-        background: rgba(251, 191, 36, 0.1) !important;
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(251, 191, 36, 0.2);
-        border-radius: 12px;
-        box-shadow: 0 2px 12px rgba(251, 191, 36, 0.1);
+
+    a {
+        color: #9BA4FF !important;
     }
-    
-    /* Section headers */
-    h2, h3 {
-        color: #1f2937;
-        font-weight: 600;
-        font-family: 'Open Sans', sans-serif;
+
+    a:hover {
+        color: #ffffff !important;
+        text-decoration: none;
     }
-    
-    h3 {
-        color: #6C63FF;
-    }
-    
+
     /* Responsive */
     @media (max-width: 768px) {
         .main .block-container {
-            padding: 1.5rem 1rem;
+            padding: 1.8rem 1.2rem;
         }
-        
+
         h1 {
             font-size: 2rem;
         }
     }
     </style>
-    """, unsafe_allow_html=True)
+    """,
+        unsafe_allow_html=True,
+    )
 
 
 @st.cache_resource(ttl=0)
@@ -366,7 +371,7 @@ def main():
             
             st.markdown("""
             <div style="text-align: center; margin-top: 1.5rem; margin-bottom: 1rem; padding: 0 0.5rem;">
-                <p style="font-size: 0.85rem; color: #6b7280; line-height: 1.5;">
+                <p style="font-size: 0.85rem; color: rgba(232, 235, 255, 0.7); line-height: 1.5;">
                     Built by <strong style="color: #6C63FF;">Machine Learning Student Network – UC Davis</strong>
                 </p>
             </div>
@@ -442,33 +447,40 @@ def main():
                 'Price': [predicted_price, dataset_median]
             })
             
-            chart = alt.Chart(chart_data).mark_bar(
-                cornerRadius=10
+            base_chart = alt.Chart(chart_data).mark_bar(
+                cornerRadius=12
             ).encode(
-                x=alt.X('Type', axis=alt.Axis(title='', labelFontSize=12)),
-                y=alt.Y('Price', axis=alt.Axis(title='Price ($)', format='$,.0f')),
+                x=alt.X('Type', axis=alt.Axis(title='', labelFontSize=13, labelColor='#E4E7FF')),
+                y=alt.Y('Price', axis=alt.Axis(title='Price ($)', titleColor='#E4E7FF', labelColor='#E4E7FF', format='$,.0f')),
                 color=alt.condition(
                     alt.datum.Type == 'Predicted Price',
                     alt.value('#6C63FF'),
-                    alt.value('#9ca3af')
+                    alt.value('#7A7CBF')
                 )
             ).properties(
-                width=300,
-                height=200
+                width=320,
+                height=220
             )
-            
-            text = chart.mark_text(
+
+            text = base_chart.mark_text(
                 align='center',
                 baseline='bottom',
-                dy=-5,
-                fontSize=12,
+                dy=-8,
+                fontSize=13,
                 fontWeight='bold',
-                color='white'
+                color='#F4F5FF'
             ).encode(
                 text=alt.Text('Price:Q', format='$,.0f')
             )
-            
-            st.altair_chart(chart + text, use_container_width=True)
+
+            styled_chart = (
+                (base_chart + text)
+                .configure_axis(grid=False)
+                .configure_view(strokeOpacity=0)
+                .configure_background(color='rgba(0,0,0,0)')
+            )
+
+            st.altair_chart(styled_chart, use_container_width=True)
             
             # Reset button
             if st.button("🔄 Reset Form", use_container_width=True):
@@ -489,7 +501,7 @@ def main():
                 with col2:
                     st.markdown("""
                     <div style="display: flex; align-items: center; height: 100%; padding-left: 0.5rem; padding-top: 1rem;">
-                        <p style="font-size: 0.75rem; color: #6b7280; margin: 0;">
+                        <p style="font-size: 0.75rem; color: rgba(232, 235, 255, 0.7); margin: 0;">
                             Built by <strong style="color: #6C63FF;">Machine Learning Student Network – UC Davis</strong>
                         </p>
                     </div>
@@ -688,7 +700,7 @@ def main():
         # Display in styled card
         st.markdown(f"""
         <div class="prediction-card">
-            <div style="font-size: 1.2rem; margin-bottom: 1rem; color: #6b7280;">Estimated Property Value</div>
+            <div style="font-size: 1.2rem; margin-bottom: 1rem; color: rgba(232, 235, 255, 0.7);">Estimated Property Value</div>
             <div class="prediction-price">{format_currency(predicted_price)}</div>
         </div>
         """, unsafe_allow_html=True)
