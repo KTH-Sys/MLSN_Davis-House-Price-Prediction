@@ -49,7 +49,7 @@ except ImportError as e:
 
 # Page configuration
 st.set_page_config(
-    page_title="Davis House Price Predictor",
+    page_title="DavisScope",
     page_icon="🏠",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -562,7 +562,7 @@ def main():
     )
 
     # Main content
-    st.title("Davis House Price Predictor")
+    st.title("DavisScope")
     st.markdown('<p class="subtitle">Estimate housing prices in Davis with machine learning.</p>', unsafe_allow_html=True)
     
     # Prediction form
