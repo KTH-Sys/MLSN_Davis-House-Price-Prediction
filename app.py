@@ -390,7 +390,7 @@ def main():
             st.markdown("""
             <div style="text-align: center; margin-top: 1.5rem; margin-bottom: 1rem; padding: 0 0.5rem;">
                 <p style="font-size: 0.85rem; color: rgba(232, 235, 255, 0.8); line-height: 1.6;">
-                    Built by <strong style="color: #6C63FF;">Kyaw Thi Ha, Yaohong Chen, Mehak Gulati, Zicheng Huang,<br>and Jyothiswaroop Makala</strong>
+                    Built by <strong style="color: #6C63FF;">Kyaw Thi Ha, Yaohong Chen, Mehak Gulati, Zicheng Huang,<br>Aaddhya Mishra, and Jyothi Swaroop Makala</strong>
                 </p>
             </div>
             """, unsafe_allow_html=True)
@@ -547,7 +547,7 @@ def main():
         footer_text = (
             "<p style=\"font-size: 0.78rem; color: rgba(232, 235, 255, 0.72); line-height: 1.55; margin-top: 0.4rem;\">"
             "Built by <strong style=\"color: #6C63FF;\">Kyaw Thi Ha, Yaohong Chen, Mehak Gulati, Zicheng Huang,<br>"
-            "and Jyothiswaroop Makala</strong>"
+            "Aaddhya Mishra, and Jyothi Swaroop Makala</strong>"
             "</p>"
         )
 
@@ -609,53 +609,6 @@ def main():
                 key="input_sqft_lot"
             )
         
-        # Additional inputs in second row
-        col3, col4 = st.columns(2)
-        
-        with col3:
-            year_built = st.number_input(
-                "📅 Year Built",
-                min_value=1800,
-                max_value=2025,
-                value=1990,
-                step=1,
-                key="input_year_built"
-            )
-            
-            condition = st.number_input(
-                "⭐ Condition (1-5)",
-                min_value=1,
-                max_value=5,
-                value=3,
-                step=1,
-                key="input_condition"
-            )
-        
-        with col4:
-            grade = st.number_input(
-                "🏆 Grade (1-13)",
-                min_value=1,
-                max_value=13,
-                value=7,
-                step=1,
-                key="input_grade"
-            )
-            
-            zipcode = st.text_input(
-                "📍 Zipcode",
-                value="95616",
-                key="input_zipcode"
-            )
-        
-        distance_to_ucd = st.number_input(
-            "🎓 Distance to UC Davis (km)",
-            min_value=0.0,
-            max_value=50.0,
-            value=5.0,
-            step=0.5,
-            key="input_distance_to_ucd"
-        )
-        
         submitted = st.form_submit_button("🔮 Predict Price", use_container_width=True, type="primary")
     
     # Prediction logic
@@ -664,12 +617,7 @@ def main():
             'bedrooms': int(bedrooms),
             'bathrooms': float(bathrooms),
             'sqft_living': int(sqft_living),
-            'sqft_lot': int(sqft_lot),
-            'year_built': int(year_built),
-            'condition': int(condition),
-            'grade': int(grade),
-            'zipcode': str(zipcode),
-            'distance_to_ucd': float(distance_to_ucd)
+            'sqft_lot': int(sqft_lot)
         }
         
         is_valid, error_msg = validate_inputs(user_inputs)
@@ -752,7 +700,7 @@ def main():
         # Show property details
         if 'user_inputs' in st.session_state:
             user_inputs = st.session_state.user_inputs
-            col1, col2, col3 = st.columns(3)
+            col1, col2 = st.columns(2)
             
             with col1:
                 st.metric("🛏 Bedrooms", user_inputs.get('bedrooms', 'N/A'))
@@ -761,10 +709,6 @@ def main():
             with col2:
                 st.metric("🛁 Bathrooms", user_inputs.get('bathrooms', 'N/A'))
                 st.metric("🌳 Lot Size", f"{user_inputs.get('sqft_lot', 0):,} sqft")
-            
-            with col3:
-                st.metric("⭐ Condition", user_inputs.get('condition', 'N/A'))
-                st.metric("🏆 Grade", user_inputs.get('grade', 'N/A'))
 
 
 if __name__ == "__main__":

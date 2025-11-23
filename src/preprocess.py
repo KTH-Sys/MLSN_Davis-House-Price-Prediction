@@ -9,9 +9,7 @@ from typing import Dict, List, Optional, Any
 
 # Default feature order if model.feature_names_in_ is not available
 FEATURE_ORDER = [
-    'bedrooms', 'bathrooms', 'sqft_living', 'sqft_lot', 'year_built',
-    'condition', 'grade', 'distance_to_ucd',
-    # Zipcode one-hot columns will be appended (e.g., 'zipcode_95616', 'zipcode_95618', etc.)
+    'bedrooms', 'bathrooms', 'sqft_living', 'sqft_lot',
 ]
 
 
@@ -51,14 +49,7 @@ def build_feature_frame(
                 'bathrooms': user_inputs.get('bathrooms', 2.0),
                 'sqft_living': user_inputs.get('sqft_living', 1500),
                 'sqft_lot': user_inputs.get('sqft_lot', 5000),
-                'year_built': user_inputs.get('year_built', 1990),
-                'condition': user_inputs.get('condition', 3),
-                'grade': user_inputs.get('grade', 7),
-                'distance_to_ucd': user_inputs.get('distance_to_ucd', 5.0),
             }
-            
-            # Handle zipcode one-hot encoding
-            zipcode = str(user_inputs.get('zipcode', '95616'))
             
             # Use model's expected columns
             feature_dict = {col: 0.0 for col in expected_cols}
@@ -67,11 +58,6 @@ def build_feature_frame(
             for feat, val in base_features.items():
                 if feat in feature_dict:
                     feature_dict[feat] = float(val)
-            
-            # Set zipcode one-hot column
-            zipcode_col = f'zipcode_{zipcode}'
-            if zipcode_col in feature_dict:
-                feature_dict[zipcode_col] = 1.0
     else:
         # Fallback to FEATURE_ORDER
         base_features = {
@@ -79,19 +65,9 @@ def build_feature_frame(
             'bathrooms': user_inputs.get('bathrooms', 2.0),
             'sqft_living': user_inputs.get('sqft_living', 1500),
             'sqft_lot': user_inputs.get('sqft_lot', 5000),
-            'year_built': user_inputs.get('year_built', 1990),
-            'condition': user_inputs.get('condition', 3),
-            'grade': user_inputs.get('grade', 7),
-            'distance_to_ucd': user_inputs.get('distance_to_ucd', 5.0),
         }
         
-        zipcode = str(user_inputs.get('zipcode', '95616'))
         feature_dict = base_features.copy()
-        
-        # Common Davis zipcodes
-        common_zipcodes = ['95616', '95618', '95617', '95619']
-        for zc in common_zipcodes:
-            feature_dict[f'zipcode_{zc}'] = 1.0 if zc == zipcode else 0.0
     
     # Create DataFrame
     df = pd.DataFrame([feature_dict])
@@ -133,31 +109,6 @@ def validate_inputs(user_inputs: Dict[str, Any]) -> tuple[bool, Optional[str]]:
     sqft_lot = user_inputs.get('sqft_lot')
     if sqft_lot is None or not (100 <= sqft_lot <= 1000000):
         return False, "Square footage (lot) must be between 100 and 1,000,000"
-    
-    # Year built
-    year_built = user_inputs.get('year_built')
-    if year_built is None or not (1800 <= year_built <= 2025):
-        return False, "Year built must be between 1800 and 2025"
-    
-    # Condition (typically 1-5)
-    condition = user_inputs.get('condition')
-    if condition is None or not (1 <= condition <= 5):
-        return False, "Condition must be between 1 and 5"
-    
-    # Grade (typically 1-13)
-    grade = user_inputs.get('grade')
-    if grade is None or not (1 <= grade <= 13):
-        return False, "Grade must be between 1 and 13"
-    
-    # Distance to UCD
-    distance_to_ucd = user_inputs.get('distance_to_ucd')
-    if distance_to_ucd is None or not (0 <= distance_to_ucd <= 50):
-        return False, "Distance to UCD must be between 0 and 50 km"
-    
-    # Zipcode (basic validation)
-    zipcode = user_inputs.get('zipcode')
-    if zipcode is None or not str(zipcode).isdigit() or len(str(zipcode)) != 5:
-        return False, "Zipcode must be a 5-digit number"
     
     return True, None
 
